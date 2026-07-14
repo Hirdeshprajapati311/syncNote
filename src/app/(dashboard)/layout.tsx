@@ -1,3 +1,4 @@
+import DashboardHeader from "@/components/Navigations/headers/DashboardHeader"
 import AppSidebar from "@/components/Navigations/AppSidebar"
 const DashboardLayout = ({ children }: {
   children: React.ReactNode
@@ -5,7 +6,7 @@ const DashboardLayout = ({ children }: {
   return (
     <div>
       <AppSidebar />
-      <main>
+      <main className="flex-1">
         {children}
       </main>
     </div>

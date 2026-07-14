@@ -1,15 +1,16 @@
 'use client'
-import { FileText, Inbox, Search, Star } from "lucide-react";
+import { Inbox, Search, Star } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip";
+import { IoDocumentText } from "react-icons/io5";
 
 
 const sidebarData = [
   { id: 1, name: "Inbox", icon: <Inbox />, path: "/" },
   { id: 2, name: "Search", icon: <Search />, path: "/search" },
-  { id: 3, name: "My Documents", icon: <FileText />, path: "/documents" },
+  { id: 3, name: "My Documents", icon: <IoDocumentText size={24} />, path: "/documents" },
   { id: 4, name: "Favorites", icon: <Star />, path: "/favorites" }
 ]
 

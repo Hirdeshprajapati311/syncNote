@@ -1,12 +1,16 @@
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
 import { ChevronUp } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Header = ({ sidebar }: { sidebar: boolean }) => {
 
 
+  const isMobile = useIsMobile()
+
+
   return (
-    <div className={`${sidebar ? "p-8" : "px-2 py-8"}`}>
+    <div className={`${isMobile ? "px-8 py-4" : sidebar ? "p-8" : "px-2 py-8"}`}>
 
       <div className={`bg-secondary/10 flex flex-row  rounded-lg  items-center justify-center gap-2 ${sidebar ?
         "py-3 px-1" : "py-1 px-1"}`}>
