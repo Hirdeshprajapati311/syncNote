@@ -8,6 +8,13 @@ import { GrDocumentText } from "react-icons/gr";
 import { IoMdCode } from "react-icons/io";
 import { CiMenuKebab } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
+import { Lightbulb } from "lucide-react";
+import { MdOutlineTerminal } from "react-icons/md";
+import { MdOutlineColorLens } from "react-icons/md";
+import { MdOutlineRocketLaunch } from "react-icons/md";
+import { RxDashboard } from "react-icons/rx";
+import { FaListUl } from "react-icons/fa";
+import { IoStar } from "react-icons/io5";
 
 const CardData = [
   { id: 1, color: "bg-primary text-white!", title: "New Document", text: "Start a fresh thought or draft", image: "/Container.png", icon: <BiPlusCircle size={35} className="text-white" />, textColor: "text-white" },
@@ -28,17 +35,45 @@ const sharedWithMeData = [
   { id: 3, title: "June Editorial Calendar", text: "Shared by Jenny Wilson" }
 ]
 
+const favoriteDocs = [
+  {
+    id: 1,
+    title: "Vision Statement",
+    text: "Refining the core mission and value proposition",
+    icon: <Lightbulb size={24} />,
+  },
+  {
+    id: 2,
+    title: "Developer Guidelines",
+    text: "Coding standards and architectural",
+    icon: <MdOutlineTerminal size={24} />,
+  },
+  {
+    id: 3,
+    title: "Brand Identity",
+    text: "Colors, typography and tone of voice guides",
+    icon: <MdOutlineColorLens size={24} />,
+  },
+  {
+    id: 4,
+    title: "Launch Checklist",
+    text: "Final steps before the global release",
+    icon: <MdOutlineRocketLaunch size={24} />,
+  },
+
+]
+
 const page = () => {
   return (
-    <div className="px-8 bg-primary/3 ">
+    <div className=" bg-primary/3 ">
       <DashboardHeader />
 
 
-      <div className="w-full px-1 sm:px-2 md:px-4 lg:px-8 py-4 overflow-y-auto flex flex-col gap-10">
+      <div className="w-full px-12  sm:px-2 md:px-4 lg:px-8 py-4 overflow-y-auto flex flex-col gap-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 ">
 
           <div className="flex flex-col font-lexend">
-            <span className="text-2xl md:text-5xl font-bold">Good morning, Alex</span>
+            <span className="text-2xl md:text-5xl font-bold">Good morning, Hirdesh</span>
             <p className="text-gray-500 text-sm md:text-lg ">Here is what's happening with your notes today</p>
           </div>
 
@@ -68,7 +103,28 @@ const page = () => {
 
           {/* Shared With Me */}
           <ShardWithMe />
+        </div>
 
+
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-row justify-between items-center px-4">
+            <span className="text-2xl text-gray-600">Favorite Documents</span>
+
+            <div className="flex flex-row items-center gap-1">
+              <button className="p-1 rounded bg-secondary/20">
+                <RxDashboard size={15} className="" />
+              </button>
+              <FaListUl />
+            </div>
+          </div>
+
+
+          <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-2 md:gap-4">
+            {favoriteDocs.map((fav,) => (
+              <FavoriteCards key={fav.id} title={fav.title} text={fav.text} icon={fav.icon} />
+            ))}
+
+          </div>
 
         </div>
 
@@ -81,6 +137,24 @@ const page = () => {
 
 export default page;
 
+const FavoriteCards = ({ title, text, icon, }: { title: string, text: string, icon: React.ReactNode }) => {
+  return (
+    <div className="rounded-4xl mb-12  bg-white col-span-1 border gap-4 p-6 flex flex-col">
+      <div className="flex flex-row justify-between">
+        <div className="bg-primary/20 text-primary rounded-lg p-2">{icon}</div>
+        <div className=" text-primary">
+          <IoStar size={24} />
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <span className="font-bold text-xl">{title}</span>
+        <p>{text}</p>
+      </div>
+
+    </div>
+  )
+}
+
 
 
 const RecentDocs = () => {
@@ -91,9 +165,9 @@ const RecentDocs = () => {
         <button className="font-semibold font-lexend text-secondary cursor-pointer">View all</button>
       </div>
       <div className="flex flex-col rounded-3xl border">
-        <div className="rounded-2xl border">
+        <div className="rounded-2xl bg-white border">
           {recentData.map((recent, index) => (
-            <div className={`flex flex-row items-center justify-between p-6 cursor-pointer hover:bg-primary/10    ${index !== recentData.length - 1 ? 'border-b' : ''}`}>
+            <div key={recent.id} className={`flex flex-row items-center justify-between p-6 cursor-pointer hover:bg-primary/10    ${index !== recentData.length - 1 ? 'border-b' : ''}`}>
               <div className="flex flex-row  gap-4">
                 <div className="p-4 bg-secondary/20 text-secondary rounded-lg">{recent.icon}</div>
 
@@ -118,12 +192,12 @@ const ShardWithMe = () => {
   return (
     <div className="flex flex-col gap-4 col-span-1 md:col-span-2  ">
       <div className="flex flex-row justify-between px-1 items-center">
-        <h1 className="text-2xl text-gray-800">Shared With ME</h1>
+        <h1 className="text-2xl text-gray-800">Shared With Me</h1>
         <button className="font-semibold font-lexend text-secondary cursor-pointer">Manage</button>
       </div>
-      <div className="rounded-4xl flex flex-col p-6 gap-4 border">
+      <div className="rounded-4xl bg-white flex flex-col p-6 gap-4 border">
         {sharedWithMeData.map((share) => (
-          <div className="gap-4 flex p-1 rounded-xl hover:bg-primary/10 flex-row items-center ">
+          <div key={share.id} className="gap-4 flex p-1 rounded-xl hover:bg-primary/10 flex-row items-center ">
             <CgProfile size={30} />
 
             <div>

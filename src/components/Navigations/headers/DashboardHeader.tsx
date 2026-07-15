@@ -13,7 +13,7 @@ export default function DashboardHeader() {
 
 
   return (
-    <div className="py-4 z-10 px-6 sm:px-2 md:px-0 flex flex-row justify-between space-x-4">
+    <div className="py-4 z-10 bg-white sm:px-2 md:px-0 flex flex-row justify-between space-x-4 sticky top-0 px-8 ">
 
       {/* Search */}
       <div className="relative  ml-8   min-w-30 sm:w-lg md:w-xl   lg:w-2xl max-w-3xl bg-secondary/10 gap-2 flex flex-row rounded-2xl">
