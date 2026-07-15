@@ -73,7 +73,7 @@ const AppSidebar = () => {
   if (!isMobile) {
     return (
       <aside
-        className={`h-screen border-r bg-primary/3 transition-all duration-300 ${sidebar ? "w-72" : "w-16"
+        className={`h-dvh border-r bg-primary/3 transition-all duration-300 ${sidebar ? "w-72" : "w-16"
           } flex flex-col`}
       >
         {SidebarContent}
@@ -88,7 +88,7 @@ const AppSidebar = () => {
       {!mobileOpen && (
         <button
           onClick={() => setMobileOpen(true)}
-          className="fixed left-4 top-4 z-50 rounded-md px-2 pt-2 hover:bg-accent"
+          className="fixed left-4 top-4 z-1000 rounded-md px-2 pt-2 hover:bg-accent"
         >
           <MenuIcon />
         </button>

@@ -42,16 +42,17 @@ export default Menu;
 
 const MenuList = ({ icon, name, path, pathname, sidebar, setSidebar }: { icon: React.ReactNode, name: string, path: string, pathname: string, sidebar: boolean, setSidebar: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
+
   const isActive = pathname === path
 
   const handleClick = () => {
-    if (path === "/documents") {
+    if (path === "/editor") {
       setSidebar(false)
     }
   }
 
   return (
-    <Link onClick={handleClick} href={path} className={`flex items-center flex-row gap-4 py-2 hover:bg-secondary/10 rounded-lg pl-4 ${isActive ? "border-l-4 text-secondary border-secondary bg-primary/10" : "text-gray-600 items-center"}`}>
+    <Link href={path} className={`flex items-center flex-row gap-4 py-2 hover:bg-secondary/10 rounded-lg pl-4 ${isActive ? "border-l-4 text-secondary border-secondary bg-primary/10" : "text-gray-600 border-l-4 border-transparent "}`}>
       {sidebar ? icon : (
         <>
           <Tooltip>
