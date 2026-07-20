@@ -55,7 +55,7 @@ const comments = [
 
 const page = () => {
   return (
-    <div className='mt-10  flex flex-col w-full gap-4 '>
+    <div className='mt-10  flex flex-col w-full gap-4 py-2 px-6'>
 
 
       <div className='flex flex-row bg-success-light/20 border  items-center rounded-lg gap-1 px-4'>
@@ -157,7 +157,7 @@ const Filter = ({ icon, text }: { icon: React.ReactNode, text: string }) => {
 const DocsCard = ({ title, content, Time, status, from, view }: { title: string, content: string, Time: string, status?: string, from?: string, view?: string }) => {
 
   return (
-    <div className='flex flex-row items-start p-6 gap-4 rounded-xl border'>
+    <div className='flex flex-row items-start p-6 gap-4 rounded-xl border bg-white'>
       <div className='text-primary  p-3 rounded-lg bg-primary/8'><IoDocumentTextOutline size={28} /></div>
 
       <div className='flex flex-col gap-2 pr-4'>
@@ -190,7 +190,7 @@ const DocsCard = ({ title, content, Time, status, from, view }: { title: string,
 
 const Comment = ({ name, from, comment }: { name: string, from: string, comment: string }) => {
   return (
-    <div className='flex flex-col items-start gap-1'>
+    <div className='flex flex-col items-start gap-1 '>
       <div className='flex flex-row gap-2 items-center'>
         <User2 className='rounded-full p-1 border bg-gray-100' size={28} />
         <span className='font-bold text-xs' >{name}</span>
@@ -198,8 +198,8 @@ const Comment = ({ name, from, comment }: { name: string, from: string, comment:
       </div>
 
       <div className='flex flex-row gap-6'>
-        <div className='w-0.5 rounded bg-blue-100' />
-        <p className='text-sm font-light text-gray-800'>&ldquo;{comment}&rdquo;</p>
+        <div className='w-0.5 rounded bg-gray-300' />
+        <i className='text-sm font-light font- text-gray-800'>&ldquo;{comment}&rdquo;</i>
       </div>
 
     </div>
