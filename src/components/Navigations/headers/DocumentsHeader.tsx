@@ -15,7 +15,7 @@ const DocumentsHeader = () => {
   const pathname = usePathname()
 
   return (
-    <div className='py-4 z-10 px-6 sm:px-2 md:px-0 flex flex-row justify-between space-x-4'>
+    <div className='py-4 z-10 px-6 sm:px-2 md:px-0 flex flex-row justify-between space-x-4 sticky top-0 bg-white'>
 
       <div className='flex flex-row pl-2 md:pl-0 gap-0.5'>
         <Link className={`font-lexend ${pathname === "/" ? "text-primary font-semibold" : "text-gray-600"}`} href={"/"}>SyncNote</Link>
