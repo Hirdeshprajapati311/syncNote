@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MenuIcon, Plus, X } from "lucide-react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -14,6 +14,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { usePathname } from "next/navigation";
 
 const AppSidebar = () => {
   const isMobile = useIsMobile();
@@ -21,6 +22,18 @@ const AppSidebar = () => {
   const [sidebar, setSidebar] = useState(true);
 
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const pathname = usePathname();
+
+  const isEditor = pathname.startsWith("/documents/") && pathname !== "/documents"
+
+  useEffect(() => {
+    if (isMobile) {
+      setSidebar(true);
+    } else {
+      setSidebar(!isEditor);
+    }
+  }, [isEditor, isMobile]);
 
   const SidebarContent = (
     <>
@@ -73,7 +86,7 @@ const AppSidebar = () => {
   if (!isMobile) {
     return (
       <aside
-        className={`h-dvh border-r bg-primary/3 transition-all duration-300 ${sidebar ? "w-72" : "w-16"
+        className={`h-dvh border-r bg-primary/3 transition-all duration-300 ${sidebar ? "w-72" : "w-16 "
           } flex flex-col`}
       >
         {SidebarContent}
@@ -101,7 +114,7 @@ const AppSidebar = () => {
             onClick={() => setMobileOpen(false)}
           />
 
-          <aside className="fixed left-0 top-0 z-50 flex h-screen w-72 flex-col border-r bg-primary/3 shadow-xl">
+          <aside className="fixed left-0 top-0 z-50 flex h-screen w-72 flex-col border-r bg-white shadow-xl">
             {SidebarContent}
           </aside>
         </>

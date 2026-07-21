@@ -1,3 +1,4 @@
+"use client"
 import { Search, User, User2 } from 'lucide-react';
 import { MdOutlineCalendarToday } from "react-icons/md";
 import { MdOutlinePerson } from "react-icons/md";
@@ -9,6 +10,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { FaRegFolder } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 
 const filterData = [
@@ -54,18 +56,21 @@ const comments = [
 ]
 
 const page = () => {
+
+  const isMobile = useIsMobile()
+
   return (
-    <div className='mt-10  flex flex-col w-full gap-4 py-2 px-6'>
+    <div className='mt-2 sm:mt-4 md:mt-10  flex flex-col w-full gap-4 py-2 px-6'>
 
 
       <div className='flex flex-row bg-success-light/20 border  items-center rounded-lg gap-1 px-4'>
         <Search className='text-primary' size={16} />
-        <input className='p-4 w-full outline-0 ring-0 border-0' type="text" placeholder='Search across documents, comments, and members...' />
+        <input className='p-4 w-full outline-0 ring-0 border-0 text-sm md:text-base' type="text" placeholder='Search across documents, comments, and members...' />
       </div>
 
 
 
-      <div className='flex flex-row gap-4 px-1'>
+      <div className='flex flex-row overflow-x-auto gap-4 px-1'>
         {filterData.map((data) => (
           <Filter icon={data.icon} key={data.id} text={data.text} />
         ))}
@@ -75,11 +80,11 @@ const page = () => {
 
       {/* RECENT */}
       <div className='flex flex-col gap-4 mt-4'>
-        <span className='text-gray-400'>RECENT</span>
+        <span className='text-gray-400 text-sm md:text-base'>RECENT</span>
         {recent.map((r, i) => (
           <div key={i} className='px-1 gap-2 items-center text-gray-800  flex flex-row '>
             <RxCounterClockwiseClock size={16} />
-            <div>{r}</div>
+            <div className='text-sm md:text-base'>{r}</div>
           </div>
         ))}
 
@@ -89,21 +94,21 @@ const page = () => {
 
       {/* TOP MEMBERS */}
       <div className='flex flex-col gap-4 mt-4'>
-        <span className='text-gray-400'>TOP MEMBERS</span>
+        <span className='text-gray-400 text-sm md:text-base'>TOP MEMBERS</span>
         {members.map((m) => (
           <div key={m.id} className='px-1 gap-2 items-center text-gray-800 justify-between flex flex-row '>
             <div className='flex flex-row gap-2 items-center'>
               <div className='p-2 rounded-full border'>
-                <User />
+                <User size={isMobile ? 20 : 24} />
               </div>
               <div className='flex flex-col'>
-                <span className='text-gray-800'>{m.name}</span>
-                <p className='text-sm text-gray-600'>{m.designation}</p>
+                <span className='text-gray-800 text-sm md:text-base'>{m.name}</span>
+                <p className='text-xs md:text-sm text-gray-600'>{m.designation}</p>
               </div>
             </div>
 
             <button className='p-2 rounded-full cursor-pointer hover:bg-gray-100'>
-              <FiMessageSquare size={24} />
+              <FiMessageSquare size={isMobile ? 20 : 24} />
             </button>
           </div>
         ))}
@@ -113,8 +118,8 @@ const page = () => {
       {/* DOCUMENTS */}
       <div className='flex flex-col gap-4 mt-4'>
         <div className='justify-between flex flex-row items-center'>
-          <span className='text-gray-400'>DOCUMENTS</span>
-          <button className='text-blue-500 text-sm'>View All</button>
+          <span className='text-gray-400 text-sm md:text-base'>DOCUMENTS</span>
+          <button className='text-blue-500  text-xs md:text-sm'>View All</button>
         </div>
         {documnets.map((docs) => (
           <DocsCard key={docs.id} Time={docs.Time} title={docs.title} status={docs.status} view={docs.view} content={docs.content} from={docs.from} />
@@ -127,8 +132,8 @@ const page = () => {
       {/* COMMENTS */}
       <div className='flex flex-col gap-4 mt-4 mb-10'>
         <div className='justify-between flex flex-row items-center'>
-          <span className='text-gray-400'>COMMENTS</span>
-          <button className='text-blue-500 text-sm'>View All</button>
+          <span className='text-gray-400 text-sm md:text-base'>COMMENTS</span>
+          <button className='text-blue-500 text-xs md:text-sm'>View All</button>
         </div>
         <div className='flex flex-col bg-blue-50/70 border rounded-2xl gap-8 p-6'>
           {comments.map((comment) => (
@@ -146,7 +151,7 @@ export default page;
 
 const Filter = ({ icon, text }: { icon: React.ReactNode, text: string }) => {
   return (
-    <div className='flex text-xs md:text-sm flex-row px-3 p-2 bg-white border-2 items-center text-gray-700 rounded-3xl gap-2'>
+    <div className='flex text-[8px] sm:text-xs md:text-sm flex-row px-3 p-2 bg-white border-2 items-center text-gray-700 rounded-3xl gap-2'>
       <div >{icon}</div>
       <span>{text}</span>
     </div>
@@ -156,28 +161,30 @@ const Filter = ({ icon, text }: { icon: React.ReactNode, text: string }) => {
 
 const DocsCard = ({ title, content, Time, status, from, view }: { title: string, content: string, Time: string, status?: string, from?: string, view?: string }) => {
 
+  const isMobile = useIsMobile()
+
   return (
-    <div className='flex flex-row items-start p-6 gap-4 rounded-xl border bg-white'>
-      <div className='text-primary  p-3 rounded-lg bg-primary/8'><IoDocumentTextOutline size={28} /></div>
+    <div className='flex flex-row items-start p-3 md:p-6 gap-2 md:gap-4 rounded-xl border bg-white'>
+      <div className='text-primary p-2 md:p-3 rounded-lg bg-primary/8'><IoDocumentTextOutline size={isMobile ? 16 : 28} /></div>
 
       <div className='flex flex-col gap-2 pr-4'>
-        <span className='gap-2 flex flex-row'>{title} {status && <span className='p-1 text-gray-800 bg-orange-100 text-sm  rounded-lg'>
+        <span className='gap-2 items-start text-sm md:text-base flex flex-row '>{title} {status && <span className='p-1 text-gray-800 bg-orange-100 text-xs md:text-sm  rounded-lg'>
           {status}
         </span>} </span>
-        <p className='text-sm text-gray-600'>{content}</p>
+        <p className='text-xs md:text-sm line-clamp-3 lg:line-clamp-none w-[12rem] md:w-full text-gray-600'>{content}</p>
         <div className='flex flex-row gap-4 items-center'>
-          <div className='text-gray-400 flex flex-row gap-1 items-center text-xs'>
-            <RxCounterClockwiseClock size={12} />
+          <div className='text-gray-400 flex flex-row gap-1 items-center text-[8px] md:text-xs'>
+            <RxCounterClockwiseClock size={isMobile ? 8 : 12} />
             {Time}
           </div>
 
-          {from && <div className='text-gray-400 flex flex-row gap-1 items-center text-xs'>
-            <FaRegFolder size={14} />
+          {from && <div className='text-gray-400 flex flex-row gap-1  items-center text-[8px] md:text-xs'>
+            <FaRegFolder size={isMobile ? 9 : 14} />
             {from}
           </div>}
 
-          {view && <div className='text-gray-400 flex flex-row gap-1 items-center text-xs'>
-            <MdOutlineRemoveRedEye size={14} />
+          {view && <div className='text-gray-400 flex flex-row gap-1 items-center text-[8px] md:text-xs'>
+            <MdOutlineRemoveRedEye size={isMobile ? 9 : 14} />
             {view}
           </div>}
         </div>

@@ -69,8 +69,8 @@ const page = () => {
       <DashboardHeader />
 
 
-      <div className="w-full px-12  sm:px-2 md:px-4 lg:px-8 py-4 overflow-y-auto flex flex-col gap-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 ">
+      <div className="w-full  px-2  sm:px-2 md:px-4 lg:px-8 py-4 overflow-y-auto flex flex-col gap-10">
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4 ">
 
           <div className="flex flex-col font-lexend">
             <span className="text-2xl md:text-5xl font-bold">Good morning, Hirdesh</span>
@@ -79,7 +79,7 @@ const page = () => {
 
           {/* Sync status */}
 
-          <div className="flex flex-row p-4 rounded-lg shadow-lg border-l-4 gap-2 items-center border-green-500">
+          <div className="flex self-end flex-row p-4 rounded-lg shadow-lg border-l-4 gap-2 items-center border-green-500">
             <IoMdCheckmarkCircle size={24} className="text-green-500 " />
 
             <div className="flex flex-col">
@@ -108,7 +108,7 @@ const page = () => {
 
         <div className="flex flex-col gap-4">
           <div className="flex flex-row justify-between items-center px-4">
-            <span className="text-2xl text-gray-600">Favorite Documents</span>
+            <span className="text-lg md:text-2xl text-gray-600">Favorite Documents</span>
 
             <div className="flex flex-row items-center gap-1">
               <button className="p-1 rounded bg-secondary/20">
@@ -119,7 +119,7 @@ const page = () => {
           </div>
 
 
-          <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-2 md:gap-4">
+          <div className="flex flex-col  md:grid md:grid-cols-2  lg:grid-cols-4   gap- md:gap-4  ">
             {favoriteDocs.map((fav,) => (
               <FavoriteCards key={fav.id} title={fav.title} text={fav.text} icon={fav.icon} />
             ))}
@@ -147,8 +147,8 @@ const FavoriteCards = ({ title, text, icon, }: { title: string, text: string, ic
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="font-bold text-xl">{title}</span>
-        <p>{text}</p>
+        <span className="font-bold text-base md:text-xl">{title}</span>
+        <p className=" text-xs md:text-base ">{text}</p>
       </div>
 
     </div>
@@ -159,21 +159,21 @@ const FavoriteCards = ({ title, text, icon, }: { title: string, text: string, ic
 
 const RecentDocs = () => {
   return (
-    <div className="flex flex-col col-span-1 md:col-span-3 rounded-4xl gap-4   min-w-36">
+    <div className="flex flex-col col-span-1 md:col-span-3 rounded-4xl gap-1  md:gap-4   min-w-36">
       <div className="flex flex-row justify-between px-1 items-center">
-        <h1 className="text-2xl text-gray-800">Recent Documents</h1>
-        <button className="font-semibold font-lexend text-secondary cursor-pointer">View all</button>
+        <h1 className=" text-lg md:text-2xl text-gray-800">Recent Documents</h1>
+        <button className="font-semibold font-lexend text-secondary cursor-pointer text-sm md:text-md">View all</button>
       </div>
       <div className="flex flex-col rounded-3xl border">
-        <div className="rounded-2xl bg-white border">
+        <div className="rounded-2xl items-start bg-white border">
           {recentData.map((recent, index) => (
-            <div key={recent.id} className={`flex flex-row items-center justify-between p-6 cursor-pointer hover:bg-primary/10    ${index !== recentData.length - 1 ? 'border-b' : ''}`}>
+            <div key={recent.id} className={`flex flex-row items-start justify-between p-6 cursor-pointer hover:bg-primary/10    ${index !== recentData.length - 1 ? 'border-b' : ''}`}>
               <div className="flex flex-row  gap-4">
                 <div className="p-4 bg-secondary/20 text-secondary rounded-lg">{recent.icon}</div>
 
                 <div className="flex flex-col">
-                  <span className="font-bold text-lg">{recent.Title}</span>
-                  <p className="text-gray-500 font-extralight">{recent.editedAt}•&nbsp;{recent.md}</p>
+                  <span className="font-bold text-sm md:text-lg">{recent.Title}</span>
+                  <p className="text-gray-500 font-extralight text-xs md:text-base">{recent.editedAt}•&nbsp;{recent.md}</p>
                 </div>
               </div>
 
@@ -192,8 +192,8 @@ const ShardWithMe = () => {
   return (
     <div className="flex flex-col gap-4 col-span-1 md:col-span-2  ">
       <div className="flex flex-row justify-between px-1 items-center">
-        <h1 className="text-2xl text-gray-800">Shared With Me</h1>
-        <button className="font-semibold font-lexend text-secondary cursor-pointer">Manage</button>
+        <h1 className="text-lg md:text-2xl text-gray-800">Shared With Me</h1>
+        <button className="font-semibold font-lexend text-secondary cursor-pointer text-sm md:text-md">Manage</button>
       </div>
       <div className="rounded-4xl bg-white flex flex-col p-6 gap-4 border">
         {sharedWithMeData.map((share) => (
@@ -201,8 +201,8 @@ const ShardWithMe = () => {
             <CgProfile size={30} />
 
             <div>
-              <span className="font-bold">{share.title}</span>
-              <p className="font-extralight">{share.text}</p>
+              <span className="font-bold text-sm md:text-base ">{share.title}</span>
+              <p className="font-extralight text-xs md:text-sm">{share.text}</p>
             </div>
           </div>
         ))}

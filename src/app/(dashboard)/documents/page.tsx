@@ -8,7 +8,7 @@ import { Plus } from "lucide-react";
 
 
 
-const recent = [
+export const recent = [
   { id: 1, title: "Q4 Project Plans", items: "12", size: "42 MB", icon: <FaFolder /> },
   { id: 2, title: "Team Resources", items: "8", size: "165 MB", icon: <MdFolderShared /> },
   { id: 3, title: "Drafting & Design", items: "24", size: "8.4 GB", icon: <FaFolder /> },

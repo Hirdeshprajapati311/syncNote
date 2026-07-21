@@ -43,7 +43,10 @@ export default Menu;
 const MenuList = ({ icon, name, path, pathname, sidebar, setSidebar }: { icon: React.ReactNode, name: string, path: string, pathname: string, sidebar: boolean, setSidebar: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
 
-  const isActive = pathname === path
+  const isActive =
+    path === "/"
+      ? pathname === "/"
+      : pathname.startsWith(path);
 
   const handleClick = () => {
     if (path === "/editor") {
