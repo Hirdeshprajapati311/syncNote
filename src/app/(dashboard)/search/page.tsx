@@ -55,7 +55,7 @@ const comments = [
   }
 ]
 
-const page = () => {
+export default function SearchPage() {
 
   const isMobile = useIsMobile()
 
@@ -146,8 +146,6 @@ const page = () => {
     </div>
   );
 }
-
-export default page;
 
 const Filter = ({ icon, text }: { icon: React.ReactNode, text: string }) => {
   return (

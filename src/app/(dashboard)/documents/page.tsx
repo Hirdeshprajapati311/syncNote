@@ -27,7 +27,7 @@ const documents = [
 
 
 
-const page = () => {
+export default function DocumentsPage() {
   return (
     <div className="mt-4 lg:mt-10  flex flex-col w-full gap-10 py-2 px-6 overflow-y-auto">
 
@@ -93,8 +93,6 @@ const page = () => {
     </div>
   );
 }
-
-export default page;
 
 
 const Folder = ({ title, items, size, icon }: { title: string, items: string, size: string, icon: React.ReactNode }) => {
