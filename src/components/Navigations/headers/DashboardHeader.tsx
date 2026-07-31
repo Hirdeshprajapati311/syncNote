@@ -5,10 +5,12 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsCloudCheck } from "react-icons/bs";
 import { MdOutlinePeopleOutline } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 export default function DashboardHeader() {
 
   const isMobile = useIsMobile()
+  const router = useRouter()
 
 
 
@@ -30,10 +32,10 @@ export default function DashboardHeader() {
 
 
 
-      <div className=" flex flex-row gap-3 pr-2 md:pr-10">
-        <button ><IoMdNotificationsOutline size={24} /></button>
-        <button><BsCloudCheck size={24} /></button>
-        <button><MdOutlinePeopleOutline size={24} /></button>
+      <div className=" flex flex-row  pr-2 md:pr-10">
+        <button className="rounded-full cursor-pointer p-2 hover:bg-primary/10" onClick={() => router.push("/settings/notifications")} ><IoMdNotificationsOutline size={24} /></button>
+        <button className="rounded p-2 cursor-pointer hover:bg-primary/10"><BsCloudCheck size={24} /></button>
+        <button className="rounded cursor-pointer p-2 hover:bg-primary/10"><MdOutlinePeopleOutline size={24} /></button>
       </div>
     </div>
   );

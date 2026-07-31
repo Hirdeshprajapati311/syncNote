@@ -9,7 +9,7 @@ import { MdOutlinePeopleOutline } from 'react-icons/md';
 
 
 
-const SearchHeader = () => {
+const FavoritesHeader = () => {
 
   const isMobile = useIsMobile()
   const pathname = usePathname()
@@ -22,8 +22,8 @@ const SearchHeader = () => {
         <Link className={`font-lexend ${pathname === "/" ? "text-primary font-semibold" : "text-gray-600"}`} href={"/"}>SyncNote</Link>
         <ChevronRight className='text-gray-500 items-center flex translate-y-1' size={16} />
         <Link
-          className={`font-lexend ${pathname === "/search" ? "font-semibold text-primary" : "text-gray-600"}`}
-          href={"/search"}>Search</Link>
+          className={`font-lexend ${pathname === "/favorites" ? "font-semibold text-primary" : "text-gray-600"}`}
+          href={"/favorites"}>Favorites</Link>
 
       </div>
 
@@ -41,4 +41,4 @@ const SearchHeader = () => {
   );
 }
 
-export default SearchHeader;
+export default FavoritesHeader;

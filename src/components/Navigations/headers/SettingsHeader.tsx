@@ -2,7 +2,7 @@
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { BsCloudCheck } from 'react-icons/bs';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { MdOutlinePeopleOutline } from 'react-icons/md';
@@ -13,6 +13,7 @@ const SettingsHeader = () => {
 
   const isMobile = useIsMobile()
   const pathname = usePathname()
+  const router = useRouter()
 
   return (
     <div className='py-6  z-10 px-12 md:px-0 flex flex-row justify-between space-x-4 sticky top-0 bg-white lg:px-8'>
@@ -74,10 +75,14 @@ const SettingsHeader = () => {
       </div>
 
 
-      <div className=" flex flex-row gap-3 pr-0 md:pr-4">
-        {!isMobile && <button ><IoMdNotificationsOutline size={24} /></button>}
-        {!isMobile && <button><BsCloudCheck size={24} /></button>}
-        <button><MdOutlinePeopleOutline size={24} /></button>
+      <div className=" flex flex-row pr-0 md:pr-4">
+        {!isMobile && <button className="rounded-full cursor-pointer p-2 hover:bg-primary/10" onClick={() => router.push("/settings/notifications")} ><IoMdNotificationsOutline size={24} /></button>}
+        {!isMobile && <button
+          className='rounded p-2 cursor-pointer hover:bg-primary/10'
+        ><BsCloudCheck size={24} /></button>}
+        <button
+          className='rounded p-2 cursor-pointer hover:bg-primary/10'
+        ><MdOutlinePeopleOutline size={24} /></button>
       </div>
     </div>
   );

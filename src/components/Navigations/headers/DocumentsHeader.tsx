@@ -81,10 +81,14 @@ const DocumentsHeader = () => {
       </div>
 
 
-      <div className=" flex flex-row gap-3 pr-0 md:pr-4">
-        {!isMobile && <button ><IoMdNotificationsOutline size={24} /></button>}
-        {!isMobile && <button><BsCloudCheck size={24} /></button>}
-        <button><MdOutlinePeopleOutline size={24} /></button>
+      <div className=" flex flex-row pr-0 md:pr-4">
+        {!isMobile && <button className="rounded-full cursor-pointer p-2 hover:bg-primary/10" onClick={() => router.push("/settings/notifications")} ><IoMdNotificationsOutline size={24} /></button>}
+        {!isMobile && <button
+          className='rounded p-2 cursor-pointer hover:bg-primary/10'
+        ><BsCloudCheck size={24} /></button>}
+        <button
+          className='rounded p-2 cursor-pointer hover:bg-primary/10'
+        ><MdOutlinePeopleOutline size={24} /></button>
       </div>
     </div>
   );

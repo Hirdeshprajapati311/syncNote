@@ -1,6 +1,7 @@
 'use client'
 import { Inbox, Search, Star } from "lucide-react";
 import Link from "next/link";
+import { RxStarFilled } from "react-icons/rx";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip";
@@ -11,7 +12,7 @@ const sidebarData = [
   { id: 1, name: "Inbox", icon: <Inbox />, path: "/" },
   { id: 2, name: "Search", icon: <Search />, path: "/search" },
   { id: 3, name: "My Documents", icon: <IoDocumentText size={24} />, path: "/documents" },
-  { id: 4, name: "Favorites", icon: <Star />, path: "/favorites" }
+  { id: 4, name: "Favorites", icon: <RxStarFilled size={24} />, path: "/favorites" }
 ]
 
 // Search My Docs Fav
