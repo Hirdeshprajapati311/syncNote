@@ -156,6 +156,23 @@ const page = () => {
       </div>
 
 
+      {/* seperator */}
+      <div className='h-0.5 borter-t border w-full bg-blue-300 mt-4' />
+
+      <div className='flex flex-row my-8 items-center gap-4 justify-center md:justify-end'>
+
+        <button className='font-semibold text-sm text-gray-500 rounded-lg px-6 py-2'>Discard Changes</button>
+
+        {/* seperator */}
+
+
+
+        <button className='font-semibold shadow text-white text-sm bg-blue-700 rounded-lg px-6 py-2'>Save Changes</button>
+
+
+      </div>
+
+
     </div >
   );
 }
