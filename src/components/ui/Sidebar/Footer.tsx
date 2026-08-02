@@ -98,7 +98,7 @@ const Footer = ({ sidebar }: { sidebar: boolean }) => {
 
         <DropdownMenuContent align="end" className="w-56">
 
-          <DropdownMenuItem onClick={() => router.push("/profile")}>
+          <DropdownMenuItem onClick={() => router.push("/settings/profile")}>
             <User2 className="mr-2 h-4 w-4" />
             Profile
           </DropdownMenuItem>
@@ -108,7 +108,7 @@ const Footer = ({ sidebar }: { sidebar: boolean }) => {
             Settings
           </DropdownMenuItem>
 
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push("/settings/billing")}>
             <CreditCard className="mr-2 h-4 w-4" />
             Billing
           </DropdownMenuItem>
