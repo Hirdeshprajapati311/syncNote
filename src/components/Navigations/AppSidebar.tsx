@@ -62,7 +62,7 @@ const AppSidebar = () => {
         {sidebar ? (
           <>
             <Plus />
-            <span>New Document</span>
+            <span className="text-sm lg:text-base">New Document</span>
           </>
         ) : (
           <Tooltip>
@@ -86,7 +86,7 @@ const AppSidebar = () => {
   if (!isMobile) {
     return (
       <aside
-        className={`h-dvh border-r bg-primary/3 transition-all duration-300 ${sidebar ? "w-72" : "w-16 "
+        className={`h-dvh border-r bg-primary/3 transition-all duration-300 ${sidebar ? " w-56 lg:w-72" : "w-16 "
           } flex flex-col`}
       >
         {SidebarContent}
@@ -114,7 +114,7 @@ const AppSidebar = () => {
             onClick={() => setMobileOpen(false)}
           />
 
-          <aside className="fixed left-0 top-0 z-50 flex h-screen w-72 flex-col border-r bg-white shadow-xl">
+          <aside className="fixed left-0 top-0 z-50 flex h-screen w-60 lg:w-72 flex-col border-r bg-white shadow-xl">
             {SidebarContent}
           </aside>
         </>

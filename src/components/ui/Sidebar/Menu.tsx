@@ -56,7 +56,7 @@ const MenuList = ({ icon, name, path, pathname, sidebar, setSidebar }: { icon: R
   }
 
   return (
-    <Link href={path} className={`flex items-center flex-row gap-4 py-2 hover:bg-secondary/10 rounded-lg pl-4 ${isActive ? "border-l-4 text-secondary border-secondary bg-primary/10" : "text-gray-600 border-l-4 border-transparent "}`}>
+    <Link href={path} className={`flex items-center flex-row gap-4 py-2 hover:bg-secondary/10 text-sm lg:text-base rounded-lg pl-4 ${isActive ? "border-l-4 text-secondary border-secondary bg-primary/10" : "text-gray-600 border-l-4 border-transparent "}`}>
       {sidebar ? icon : (
         <>
           <Tooltip>

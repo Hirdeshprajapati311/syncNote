@@ -120,12 +120,12 @@ const Documents = ({ title, size, edited, viewMode }: { title: string, size: str
   if (viewMode === "list") {
     return (
       <div className="p-4 rounded-xl border flex flex-row items-center justify-between bg-white hover:bg-gray-50 transition-colors">
-        <div className="flex items-center gap-4 flex-1">
-          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-xs font-bold">
+        <div className="flex items-center gap-4 flex-1 min-w-0">
+          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 text-primary text-xs font-bold">
             {title.split('.')[1]?.toUpperCase() || 'DOC'}
           </div>
-          <div className="flex-1">
-            <span className="font-bold truncate">{title}</span>
+          <div className="flex-1 min-w-0">
+            <span className="font-bold block truncate">{title}</span>
             <p className="text-sm text-gray-500">{size} • Edited {edited}</p>
           </div>
         </div>

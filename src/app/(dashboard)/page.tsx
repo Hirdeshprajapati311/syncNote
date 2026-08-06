@@ -73,7 +73,7 @@ const page = () => {
       <div className="w-full px-2 sm:px-2 md:px-4 lg:px-8 py-4 overflow-y-auto flex flex-col gap-10">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col font-lexend">
-            <span className="text-2xl md:text-5xl font-bold">Good morning, Hirdesh</span>
+            <span className=" text-2xl md:text-3xl lg:text-5xl font-bold">Good morning, Hirdesh</span>
             <p className="text-gray-500 text-sm md:text-lg">Here is what's happening with your notes today</p>
           </div>
 
@@ -93,7 +93,7 @@ const page = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
           {/* Recent Documents */}
           <RecentDocs />
 
@@ -122,7 +122,7 @@ const page = () => {
             </div>
           </div>
 
-          <div className={`grid ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" : "grid-cols-1"} gap-4`}>
+          <div className={`grid ${viewMode === "grid" ? "grid-cols-2 lg:grid-cols-4" : "grid-cols-1"} gap-1  md:gap-4`}>
             {favoriteDocs.map((fav) => (
               <FavoriteCards
                 key={fav.id}
@@ -189,8 +189,8 @@ const RecentDocs = () => {
               <div className="flex flex-row gap-4">
                 <div className="p-4 bg-secondary/20 text-secondary rounded-lg">{recent.icon}</div>
                 <div className="flex flex-col">
-                  <span className="font-bold text-sm md:text-lg">{recent.Title}</span>
-                  <p className="text-gray-500 font-extralight text-xs md:text-base">{recent.editedAt}•&nbsp;{recent.md}</p>
+                  <span className="font-bold text-sm md:text-base lg:text-lg">{recent.Title}</span>
+                  <p className="text-gray-500 font-extralight text-xs md:text-sm lg:text-base">{recent.editedAt}•&nbsp;{recent.md}</p>
                 </div>
               </div>
               <button className="p-1 rounded-full hover:bg-primary/10 cursor-pointer"><CiMenuKebab size={24} /></button>
@@ -228,7 +228,7 @@ const Card = ({ color, text, title, image, icon, textColor }: { color: string, t
   return (
     <button className={`rounded-4xl hover:scale-105 transition-all duration-200 cursor-pointer relative min-w-44 flex flex-col justify-start px-6 py-4 md:w-64 lg:w-84 h-44 ${color}`}>
       <div className="mt-2">{icon}</div>
-      <span className="font-lexend w-full flex justify-start text-2xl">{title}</span>
+      <span className="font-lexend w-full flex justify-start text-lg md:text-2xl">{title}</span>
       <p className={`${textColor} flex flex-row justify-start text-sm`}>{text}</p>
       <div className="w-full flex mt-auto justify-end">
         <Image className="absolute bottom-0 right-0" src={image} alt={"button icons"} width={80} height={80} />
