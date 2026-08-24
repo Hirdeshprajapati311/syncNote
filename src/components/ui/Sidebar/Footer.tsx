@@ -19,16 +19,30 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip";
+import { useGetUser } from "@/hooks/useAuth";
 
-const Footer = ({ sidebar }: { sidebar: boolean }) => {
+interface FooterProps {
+  sidebar: boolean;
+  onLogout: () => void;
+}
+
+const Footer = ({ sidebar, onLogout }: FooterProps) => {
   const pathname = usePathname();
   const router = useRouter();
+
+
+  const { data: user } = useGetUser();
+
+
 
   const linkClass = (href: string) =>
     `flex items-center gap-3 rounded-lg px-4 py-2 transition-colors ${pathname.startsWith(href)
       ? "border-l-4 text-secondary border-secondary bg-primary/10"
       : "text-muted-foreground hover:bg-muted"
     }`;
+
+
+
 
   return (
     <div className={`mt-auto flex flex-col border-t py-3 gap-1 ${sidebar ? "px-6" : "items-center"}`}>
@@ -79,7 +93,7 @@ const Footer = ({ sidebar }: { sidebar: boolean }) => {
 
               {sidebar && (
                 <div className="text-left">
-                  <p className="font-medium">Hirdesh</p>
+                  <p className="font-medium">{user?.name}</p>
                   <p className="text-xs text-muted-foreground">
                     Free Plan
                   </p>
@@ -115,7 +129,7 @@ const Footer = ({ sidebar }: { sidebar: boolean }) => {
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem className="text-red-600">
+          <DropdownMenuItem onClick={onLogout} className="text-red-600">
             <LogOut className="mr-2 h-4 w-4" />
             Log out
           </DropdownMenuItem>

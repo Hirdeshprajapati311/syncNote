@@ -16,7 +16,12 @@ import {
 } from "../ui/tooltip";
 import { usePathname } from "next/navigation";
 
-const AppSidebar = () => {
+
+interface AppSidebarProps {
+  onLogout: () => void;
+}
+
+const AppSidebar = ({ onLogout }: AppSidebarProps) => {
   const isMobile = useIsMobile();
 
   const [sidebar, setSidebar] = useState(true);
@@ -77,7 +82,7 @@ const AppSidebar = () => {
         )}
       </div>
 
-      <Footer sidebar={sidebar} />
+      <Footer onLogout={onLogout} sidebar={sidebar} />
     </>
   );
 

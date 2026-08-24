@@ -2,6 +2,6 @@ export const ApiRoutes = {
   AUTH: {
     LOGIN: "/api/v1/auth/login",
     REGISTER: "/api/v1/auth/register",
-    LOGOUT: "/",
+    LOGOUT: "/api/v1/auth/logout",
   },
 };

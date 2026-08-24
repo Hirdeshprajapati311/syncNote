@@ -8,10 +8,28 @@ import { FaGithub } from "react-icons/fa";
 import { MdOutlineMail } from 'react-icons/md';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useLogin } from '@/hooks/useAuth';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginAccountData, loginSchema } from '../../../../validators/auth.validator';
 
 const page = () => {
 
 
+  const { mutate: login, isPending } = useLogin();
+
+  const { register, handleSubmit, formState: { errors }, watch } = useForm<LoginAccountData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: ""
+    },
+    mode: "onChange"
+  })
+
+  const onSubmit = (data: LoginAccountData) => {
+    login(data)
+  }
 
   return (
     <div className='items-center flex h-screen flex-row justify-center p-10'>
@@ -115,25 +133,31 @@ const page = () => {
 
 
 
-          <form className='flex flex-col gap-4' action="">
+          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4' action="">
             {/* Email Input */}
             <div className='gap-1 flex text-sm flex-col'>
               <label className='text-gray-600' htmlFor="">Email Address</label>
               <div className='p-3 flex flex-row bg-primary/20 border rounded-lg gap-2 items-center hover:ring-1 w-full ring-primary/10 transition-all duration-150'><MdOutlineMail className='text-primary' size={24} />
-                <input type="email" className='border-0 w-full outline-0 ring-0' placeholder='name@company.com' autoComplete='off' />
+                <input {...register('email')} type="email" className='border-0 w-full outline-0 ring-0' placeholder='name@company.com' autoComplete='off' />
+
               </div>
+              {errors.email && (<p className='text-red-500 text-xs mt-1'>{errors.email.message}</p>)}
             </div>
 
-            {/* Password Inpu */}
+            {/* Password Input */}
             <div className='gap-1 flex text-sm flex-col'>
               <div className='flex flex-row items-center justify-between'>
                 <label className='text-gray-600' htmlFor="">Password</label>
 
-                <button className='text-primary text-xs cursor-pointer'>Forgot password</button>
+                <button type='button' className='text-primary text-xs cursor-pointer'>Forgot password</button>
               </div>
               <div className='p-3 w-full flex flex-row bg-primary/20 border rounded-lg gap-2 items-center hover:ring-1 ring-primary/10 transition-all duration-150'><MdOutlineMail className='text-primary' size={24} />
-                <input autoComplete='new-password' type="password" className='border-0 outline-0  w-full ring-0' />
+                <input {...register('password')} autoComplete='new-password' type="password" className='border-0 outline-0  w-full ring-0' />
+
               </div>
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
+              )}
             </div>
 
             {/* Remember me */}
@@ -145,7 +169,7 @@ const page = () => {
 
             {/* signIn */}
 
-            <button className='bg-secondary rounded-lg text-white flex flex-row justify-center py-2 text-sm gap-2 items-center '>Sign In <ArrowRight size={20} /></button>
+            <button type='submit' disabled={isPending} className='bg-secondary rounded-lg text-white flex flex-row justify-center py-2 text-sm gap-2 items-center '>{isPending ? "Signing In...." : "Sign In"} <ArrowRight size={20} /></button>
           </form>
 
 

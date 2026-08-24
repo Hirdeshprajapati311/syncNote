@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardHeader from "@/components/Navigations/headers/DashboardHeader";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 import { BiPlusCircle } from "react-icons/bi";
@@ -17,6 +17,7 @@ import { MdOutlineRocketLaunch } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
 import { FaListUl } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
+import { useGetUser } from "@/hooks/useAuth";
 
 const CardData = [
   { id: 1, color: "bg-primary text-white!", title: "New Document", text: "Start a fresh thought or draft", image: "/Container.png", icon: <BiPlusCircle size={35} className="text-white" />, textColor: "text-white" },
@@ -66,6 +67,13 @@ const favoriteDocs = [
 const page = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
+
+
+  const { data: user } = useGetUser();
+  useEffect(() => {
+    console.log(user)
+  })
+
   return (
     <div className="bg-primary/3">
       <DashboardHeader />
@@ -73,7 +81,7 @@ const page = () => {
       <div className="w-full px-2 sm:px-2 md:px-4 lg:px-8 py-4 overflow-y-auto flex flex-col gap-10">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col font-lexend">
-            <span className=" text-2xl md:text-3xl lg:text-5xl font-bold">Good morning, Hirdesh</span>
+            <span className=" text-2xl md:text-3xl lg:text-5xl font-bold">Good morning, {user.name}</span>
             <p className="text-gray-500 text-sm md:text-lg">Here is what's happening with your notes today</p>
           </div>
 
