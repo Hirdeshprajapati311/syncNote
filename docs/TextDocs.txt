@@ -1,0 +1,1 @@
+Local-first Collaborative Editor (distributed systems, offline sync, real-time collaboration, PostgreSQL, advanced algorithms)

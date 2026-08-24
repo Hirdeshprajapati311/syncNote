@@ -1,0 +1,35 @@
+SyncNote
+
+A local-first collaborative markdown editor built with Next.js 16.
+
+Features
+
+✔ Offline editing
+
+✔ Automatic synchronization
+
+✔ Version History
+
+✔ Conflict Resolution
+
+✔ Role Based Permissions
+
+✔ AI Document Assistant
+
+✔ Live Presence
+
+✔ Comments
+
+✔ Rich Text Editing
+
+✔ Full Text Search
+
+✔ Keyboard Shortcuts
+
+✔ PWA Support
+
+✔ PostgreSQL
+
+✔ WebSocket Collaboration
+
+Now suddenly it looks like something a startup would build.
