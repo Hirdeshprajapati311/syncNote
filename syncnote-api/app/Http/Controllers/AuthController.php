@@ -41,10 +41,15 @@ class AuthController extends Controller
             ],401);
         }
 
-        $request->session()->regenerate();
+        $user = auth()->user();
+        $token = $user->createToken('syncnote-token')->plainTextToken;
+
+
+      
         return response()->json([
             'message'=>'Login Successfull',
-            'user'=>$request->user(),
+            'user'=> $user,
+            'token'=>$token,
         ]);
     }
 

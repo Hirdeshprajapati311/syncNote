@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaListUl } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { BsFilterLeft } from "react-icons/bs";
@@ -7,6 +7,8 @@ import { FaFolder } from "react-icons/fa";
 import { MdFolderShared } from "react-icons/md";
 import { BsThreeDots } from "react-icons/bs";
 import { Plus } from "lucide-react";
+import { useGetAllNotes } from "@/hooks/useNote";
+import { isRecent } from "@/utils/isRecent";
 
 export const recent = [
   { id: 1, title: "Q4 Project Plans", items: "12", size: "42 MB", icon: <FaFolder /> },
@@ -14,6 +16,8 @@ export const recent = [
   { id: 3, title: "Drafting & Design", items: "24", size: "8.4 GB", icon: <FaFolder /> },
   { id: 4, title: "Archive 2023", items: "45", size: "1.2 GB", icon: <FaFolder /> },
 ]
+
+
 
 const documents = [
   { id: 1, title: "Product Specs.md", size: "14 KB", edited: "2h ago" },
@@ -23,11 +27,30 @@ const documents = [
   { id: 5, title: "Meeting Notes - Jan", size: "8 KB", edited: "4d ago" },
 ]
 
+
+interface NoteProps { title: string, edited: string, viewMode: "grid" | "list" }
+
 export default function DocumentsPage() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
+
+  const { data: notes, isLoading, error } = useGetAllNotes();
+
+  if (isLoading) {
+    return <div>Loading notes...</div>;
+  }
+
+  if (error) {
+    return <div>Failed to load notes</div>;
+  }
+
+
+
+
+  const recentNotes = notes?.filter((note) => isRecent(note.updated_at))
+
   return (
-    <div className="mt-4 lg:mt-10 flex flex-col w-full gap-10 py-2 px-6 overflow-y-auto">
+    <div className="mt-4 lg:mt-10 flex flex-col w-full gap-10 py-2 px-6 h-screen overflow-y-auto">
 
       {/* Personal Workspace */}
       <div className="flex flex-col gap-4 lg:flex-row justify-between">
@@ -62,21 +85,31 @@ export default function DocumentsPage() {
       </div>
 
       {/* RECENT FOLDERS */}
-      <div className='flex flex-col gap-4'>
-        <span className='text-gray-400'>RECENT FOLDERS</span>
-        <div className={`grid ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" : "grid-cols-1"} gap-4`}>
-          {recent.map((r) => (
-            <Folder key={r.id} title={r.title} items={r.items} size={r.size} icon={r.icon} viewMode={viewMode} />
-          ))}
+      {recentNotes && recentNotes.length > 0 && (
+        <div className='flex flex-col gap-4'>
+          <span className='text-gray-400'>RECENT NOTES</span>
+          <div className={`grid ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" : "grid-cols-1"} gap-4`}>
+            {recentNotes?.map((note) => (
+              <NOTE
+                key={note.id}
+                title={note.title}
+                edited={note.updated_at}
+                viewMode={viewMode} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* ALL DOCUMENTS */}
+      {/* ALL NOTES */}
       <div className='flex flex-col gap-4 mb-10'>
-        <span className='text-gray-400'>ALL DOCUMENTS</span>
+        <span className='text-gray-400'>ALL NOTES</span>
         <div className={`grid ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" : "grid-cols-1"} gap-4`}>
-          {documents.map((docs) => (
-            <Documents key={docs.id} title={docs.title} size={docs.size} edited={docs.edited} viewMode={viewMode} />
+          {notes?.map((note) => (
+            <NOTE
+              key={note.id}
+              title={note.title}
+              edited={note.updated_at}
+              viewMode={viewMode} />
           ))}
         </div>
       </div>
@@ -116,17 +149,21 @@ const Folder = ({ title, items, size, icon, viewMode }: { title: string, items: 
   );
 }
 
-const Documents = ({ title, size, edited, viewMode }: { title: string, size: string, edited: string, viewMode: "grid" | "list" }) => {
+const NOTE = ({ title, edited, viewMode }: NoteProps) => {
   if (viewMode === "list") {
     return (
-      <div className="p-4 rounded-xl border flex flex-row items-center justify-between bg-white hover:bg-gray-50 transition-colors">
+      <div className="p-4 cursor-pointer rounded-xl border flex flex-row items-center justify-between bg-white hover:bg-gray-50 transition-colors">
         <div className="flex items-center gap-4 flex-1 min-w-0">
           <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 text-primary text-xs font-bold">
             {title.split('.')[1]?.toUpperCase() || 'DOC'}
           </div>
           <div className="flex-1 min-w-0">
             <span className="font-bold block truncate">{title}</span>
-            <p className="text-sm text-gray-500">{size} • Edited {edited}</p>
+            <p className="text-sm text-gray-500"> • Edited {new Date(edited).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric"
+            })}</p>
           </div>
         </div>
         <button className="text-gray-400"><BsThreeDots size={12} /></button>
@@ -135,7 +172,7 @@ const Documents = ({ title, size, edited, viewMode }: { title: string, size: str
   }
 
   return (
-    <div className="p-4 rounded-xl border flex flex-col gap-3 min-w-52 bg-white">
+    <div className="p-4 cursor-pointer rounded-xl border flex flex-col gap-3 min-w-52 bg-white">
       <div className="flex flex-col gap-2 h-30 rounded-lg p-4 bg-primary/10">
         <div className="w-30 h-1 bg-gray-300 rounded" />
         <div className="w-30 h-1 bg-gray-300 rounded" />
@@ -143,7 +180,11 @@ const Documents = ({ title, size, edited, viewMode }: { title: string, size: str
       </div>
       <div className="flex flex-col">
         <span className="mt-3 font-bold truncate">{title}</span>
-        <p className="text-sm text-gray-500">{size} • Edited {edited}</p>
+        <p className="text-sm text-gray-500">Edited {new Date(edited).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        })}</p>
       </div>
     </div>
   );

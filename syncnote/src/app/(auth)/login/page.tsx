@@ -1,11 +1,11 @@
 "use client"
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaSync } from "react-icons/fa";
 import { motion } from "framer-motion"
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { MdOutlineMail } from 'react-icons/md';
+import { MdOutlineMail, MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { useLogin } from '@/hooks/useAuth';
@@ -17,6 +17,7 @@ const page = () => {
 
 
   const { mutate: login, isPending } = useLogin();
+  const [showPassword, setShowPassword] = useState(false)
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm<LoginAccountData>({
     resolver: zodResolver(loginSchema),
@@ -151,9 +152,23 @@ const page = () => {
 
                 <button type='button' className='text-primary text-xs cursor-pointer'>Forgot password</button>
               </div>
-              <div className='p-3 w-full flex flex-row bg-primary/20 border rounded-lg gap-2 items-center hover:ring-1 ring-primary/10 transition-all duration-150'><MdOutlineMail className='text-primary' size={24} />
-                <input {...register('password')} autoComplete='new-password' type="password" className='border-0 outline-0  w-full ring-0' />
-
+              <div className='p-3 w-full flex flex-row bg-primary/20 border rounded-lg gap-2 items-center hover:ring-1 ring-primary/10 transition-all duration-150'>
+                <MdOutlineMail className='text-primary' size={24} />
+                <input
+                  {...register('password')}
+                  autoComplete='new-password'
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  className='border-0 outline-0 w-full ring-0'
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className='text-gray-500 hover:text-gray-700 focus:outline-none p-1'
+                  tabIndex={-1} // Prevents tab focus on the button
+                >
+                  {showPassword ? <MdVisibilityOff size={20} /> : <MdVisibility size={20} />}
+                </button>
               </div>
               {errors.password && (
                 <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
@@ -169,7 +184,7 @@ const page = () => {
 
             {/* signIn */}
 
-            <button type='submit' disabled={isPending} className='bg-secondary rounded-lg text-white flex flex-row justify-center py-2 text-sm gap-2 items-center '>{isPending ? "Signing In...." : "Sign In"} <ArrowRight size={20} /></button>
+            <button type='submit' disabled={isPending} className='bg-secondary rounded-lg text-white flex flex-row justify-center py-2 text-sm gap-2 items-center cursror-pointer '>{isPending ? "Signing In...." : "Sign In"} <ArrowRight size={20} /></button>
           </form>
 
 

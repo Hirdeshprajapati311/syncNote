@@ -9,7 +9,9 @@ import { IoMdNotificationsOutline } from 'react-icons/io';
 import { MdOutlinePeopleOutline } from 'react-icons/md';
 
 import { useParams } from "next/navigation";
-import { recent } from '@/app/(dashboard)/documents/page';
+import { useGetAllNotes } from '@/hooks/useNote';
+import { isRecent } from '@/utils/isRecent';
+import { useEffect } from 'react';
 
 
 
@@ -24,7 +26,15 @@ const DocumentsHeader = () => {
 
   const isEditor = pathname.startsWith("/documents/")
 
-  const project = recent.find(
+
+  const { data: notes } = useGetAllNotes()
+
+
+  useEffect(() => {
+    console.log(notes)
+  })
+
+  const project = notes?.find(
     (d) => d.id.toString() === params.id
   );
 
